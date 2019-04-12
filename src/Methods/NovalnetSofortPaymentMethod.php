@@ -82,7 +82,7 @@ class NovalnetSofortPaymentMethod extends PaymentMethodService
 		
 		$active_payment_allowed_country = 'true';
 		if ($allowed_country = $this->configRepository->get('Novalnet.novalnet_sofort_allowed_country')) {
-		$active_payment_allowed_country  = $this->paymentService->allowedCountrieslist($this->basket, $allowed_country);
+		$active_payment_allowed_country  = $this->paymentService->allowedCountries($this->basket, $allowed_country);
 		}
 	    
 	    $active_payment_minimum_amount = 'true';
