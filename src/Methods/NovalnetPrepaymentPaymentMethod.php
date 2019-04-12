@@ -21,6 +21,8 @@ use Plenty\Modules\Payment\Method\Contracts\PaymentMethodService;
 use Plenty\Plugin\Application;
 use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
+use Plenty\Modules\Basket\Models\Basket;
+use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 
 /**
  * Class NovalnetPrepaymentPaymentMethod
@@ -43,6 +45,11 @@ class NovalnetPrepaymentPaymentMethod extends PaymentMethodService
 	 * @var PaymentService
 	 */
 	private $paymentService;
+	
+	/**
+     * @var Basket
+     */
+    private $basket;
 
     /**
      * NovalnetPaymentMethod constructor.
@@ -53,11 +60,13 @@ class NovalnetPrepaymentPaymentMethod extends PaymentMethodService
      */
     public function __construct(ConfigRepository $configRepository,
                                 PaymentHelper $paymentHelper,
-                                PaymentService $paymentService)
+                                PaymentService $paymentService,
+			       BasketRepositoryContract $basket)
     {
         $this->configRepository = $configRepository;
         $this->paymentHelper = $paymentHelper;
         $this->paymentService  = $paymentService;
+	    $this->basket = $basket->load();
     }
 
     /**
