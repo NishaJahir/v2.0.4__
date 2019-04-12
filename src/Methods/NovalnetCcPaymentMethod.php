@@ -82,14 +82,14 @@ class NovalnetCcPaymentMethod extends PaymentMethodService
 		$active_payment_allowed_country  = $this->paymentService->allowedCountrieslist($this->basket, $allowed_country);
 		}
 	    
-	        $minimum_order_amount = 'true';
+	        $active_payment_minimum_amount = 'true';
 	        if ($minimum_amount = $this->configRepository->get('Novalnet.novalnet_cc_minimum_order_amount')) {
 		$active_payment_minimum_amount = $this->paymentService->getMinBasketAmount($this->basket, $minimum_amount);
 		}
 	    
-	    
-	    $this->getLogger(__METHOD__)->error('min', )
-        return (bool)(($this->configRepository->get('Novalnet.novalnet_cc_payment_active') == 'true') && $this->paymentHelper->paymentActive() && $active_payment_allowed_country);
+	    $this->getLogger(__METHOD__)->error('basket', $this->basket);
+	    $this->getLogger(__METHOD__)->error('min', $minimum_amount);
+        return (bool)(($this->configRepository->get('Novalnet.novalnet_cc_payment_active') == 'true') && $this->paymentHelper->paymentActive() && $active_payment_allowed_country && $active_payment_minimum_amount);
     }
 
     /**
