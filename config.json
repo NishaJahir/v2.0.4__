@@ -170,22 +170,6 @@
                   "defaultValue":""
                }
             },
-            "novalnet_cc_minimum_order_amount":{  
-               "type":"inputText",
-               "required":false,
-               "label":"Config.minimumOrderAmountLabel",
-               "options":{  
-                  "defaultValue":""
-               }
-            },
-            "novalnet_cc_maximum_order_amount":{  
-               "type":"inputText",
-               "required":false,
-               "label":"Config.maximumOrderAmountLabel",
-               "options":{  
-                  "defaultValue":""
-               }
-            },
             "novalnet_cc_payment_logo":{  
                "type":"inputFile",
                "required":false,
@@ -268,6 +252,22 @@
                "label":"Config.novalnetCcStandardStyleCssLabel",
                "options":{  
                   "defaultValue":"body{color: #555;font-family: Verdana,Arial,sans-serif;font-size:12px;line-height: 1.5;}.label-group{width:152px !important;float:unset !important;}.row{float:unset !important;}"
+               }
+            },
+            "novalnet_cc_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_cc_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
                }
             },
             "novalnet_cc_allowed_country":{  
@@ -399,6 +399,22 @@
                "label":"Config.paymentGuaranteeForceActiveLabel",
                "options":{  
                   "defaultValue":true
+               }
+            },
+            "novalnet_sepa_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_sepa_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
                }
             },
             "novalnet_sepa_allowed_country":{  
@@ -540,6 +556,22 @@
                   "defaultValue":true
                }
             },
+            "novalnet_invoice_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_invoice_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
             "novalnet_invoice_allowed_country":{  
                "type":"inputText",
                "required":false,
@@ -607,6 +639,22 @@
                "label":"Config.callbackOrderStatusLabel",
                "options":{  
                   "defaultValue":"9.5"
+               }
+            },
+            "novalnet_prepayment_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_prepayment_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
                }
             },
             "novalnet_prepayment_allowed_country":{  
@@ -687,6 +735,22 @@
                   "defaultValue":"9.5"
                }
             },
+            "novalnet_cashpayment_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_cashpayment_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
             "novalnet_cashpayment_allowed_country":{  
                "type":"inputText",
                "required":false,
@@ -746,6 +810,22 @@
                "label":"Config.orderCompletionStatusLabel",
                "options":{  
                   "defaultValue":"7.1"
+               }
+            },
+            "novalnet_sofort_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_sofort_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
                }
             },
             "novalnet_sofort_allowed_country":{  
@@ -845,6 +925,22 @@
                   "defaultValue":"7.1"
                }
             },
+            "novalnet_paypal_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_paypal_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
             "novalnet_paypal_allowed_country":{  
                "type":"inputText",
                "required":false,
@@ -914,6 +1010,22 @@
                   "defaultValue":"7.1"
                }
             },
+            "novalnet_ideal_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_ideal_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
             "novalnet_ideal_allowed_country":{  
                "type":"inputText",
                "required":false,
@@ -975,6 +1087,22 @@
                   "defaultValue":"7.1"
                }
             },
+            "novalnet_eps_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_eps_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
             "novalnet_eps_allowed_country":{  
                "type":"inputText",
                "required":false,
@@ -1034,6 +1162,22 @@
                "label":"Config.orderCompletionStatusLabel",
                "options":{  
                   "defaultValue":"7.1"
+               }
+            },
+            "novalnet_giropay_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_giropay_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
                }
             },
             "novalnet_giropay_allowed_country":{  
@@ -1103,6 +1247,22 @@
                "label":"Config.orderCompletionStatusLabel",
                "options":{  
                   "defaultValue":"7.1"
+               }
+            },
+            "novalnet_przelewy_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_przelewy_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
                }
             },
             "novalnet_przelewy_allowed_country":{  
