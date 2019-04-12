@@ -68,11 +68,30 @@ class NovalnetPrepaymentPaymentMethod extends PaymentMethodService
      */
     public function isActive():bool
     {
+       if ($this->configRepository->get('Novalnet.novalnet_prepayment_payment_active') == 'true') {
+		
 		$active_payment_allowed_country = 'true';
 		if ($allowed_country = $this->configRepository->get('Novalnet.novalnet_prepayment_allowed_country')) {
-		$active_payment_allowed_country  = $this->paymentService->allowedCountries($allowed_country);
+		$active_payment_allowed_country  = $this->paymentService->allowedCountrieslist($this->basket, $allowed_country);
 		}
-        return (bool)(($this->configRepository->get('Novalnet.novalnet_prepayment_payment_active') == 'true') && $this->paymentHelper->paymentActive() && $active_payment_allowed_country);
+	    
+	    $active_payment_minimum_amount = 'true';
+	    $minimum_amount = trim($this->configRepository->get('Novalnet.novalnet_prepayment_minimum_order_amount'));
+	    if (!empty($minimum_amount) && is_numeric($minimum_amount)) {
+		$active_payment_minimum_amount = $this->paymentService->getMinBasketAmount($this->basket, $minimum_amount);
+		}
+		
+		$active_payment_maximum_amount = 'true';
+	    $maximum_amount = trim($this->configRepository->get('Novalnet.novalnet_prepayment_maximum_order_amount'));
+	    if (!empty($maximum_amount) && is_numeric($maximum_amount)) {
+		$active_payment_maximum_amount = $this->paymentService->getMaxBasketAmount($this->basket, $maximum_amount);
+		}
+	    
+	    
+        return (bool)($this->paymentHelper->paymentActive() && $active_payment_allowed_country && $active_payment_minimum_amount && $active_payment_maximum_amount);
+        } 
+        return false;
+    
     }
 
     /**
