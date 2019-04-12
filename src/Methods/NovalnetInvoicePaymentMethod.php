@@ -85,7 +85,7 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodService
 		}
 	    
 	    $active_payment_minimum_amount = 'true';
-	    $minimum_amount = trim($this->configRepository->get('Novalnet.novalnet_invocie_minimum_order_amount'));
+	    $minimum_amount = trim($this->configRepository->get('Novalnet.novalnet_invoice_minimum_order_amount'));
 	       $this->getLogger(__METHOD__)->error('minamount1', $minimum_amount);
 	    if (!empty($minimum_amount) && is_numeric($minimum_amount)) {
 		    $this->getLogger(__METHOD__)->error('minamount2', $minimum_amount);
