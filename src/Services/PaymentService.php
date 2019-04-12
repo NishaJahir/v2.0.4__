@@ -20,7 +20,6 @@ use Plenty\Plugin\ConfigRepository;
 use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
 use Plenty\Modules\Account\Address\Contracts\AddressRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
-use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Helper\Services\WebstoreHelper;
 use Novalnet\Helper\PaymentHelper;
 use Plenty\Plugin\Log\Loggable;
@@ -68,10 +67,6 @@ class PaymentService
      */
     private $paymentHelper;
 	
-	/**
-	 * @var basket
-	 */
-	private $basketRepository;
     
 	
     /**
@@ -96,7 +91,7 @@ class PaymentService
                                 FrontendSessionStorageFactoryContract $sessionStorage,
                                 AddressRepositoryContract $addressRepository,
                                 CountryRepositoryContract $countryRepository,
-				BasketRepositoryContract $basketRepository,
+				
                                 WebstoreHelper $webstoreHelper,
                                 PaymentHelper $paymentHelper,
 				
@@ -106,7 +101,7 @@ class PaymentService
         $this->sessionStorage           = $sessionStorage;
         $this->addressRepository        = $addressRepository;
         $this->countryRepository        = $countryRepository;
-	$this->basketRepository  = $basketRepository->load();
+	
         $this->webstoreHelper           = $webstoreHelper;
         $this->paymentHelper            = $paymentHelper;
         $this->transactionLogData       = $transactionLogData;
@@ -847,47 +842,7 @@ class PaymentService
 	 *
 	 * @return bool
 	 */
-	public function allowedCountries($allowed_country) {
-		$allowed_country = str_replace(' ', '', strtoupper($allowed_country));
-		$allowed_country_array = explode(',', $allowed_country);	
-		if(!empty($this->basketRepository)) {
-			$basket = $this->basketRepository;
-			if(!empty($basket->customerInvoiceAddressId)){
-				$billingAddressId = $basket->customerInvoiceAddressId;				
-				$address = $this->addressRepository->findAddressById($billingAddressId);
-				if(!empty($address)){
-					$country = $this->countryRepository->findIsoCode($address->countryId, 'iso_code_2');
-					if(!empty($country)){
-						if (in_array ($country, $allowed_country_array)) {
-							return true;
-						}  
-					}
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	
-	public function getMinBasketAmount(Basket $basket, $minimum_amount) {
-	$this->getLogger(__METHOD__)->error('mini', $basket);
-		$this->getLogger(__METHOD__)->error('mini1', $minimum_amount);
-	if (! is_null($basket) && $basket instanceof Basket) {
-		$this->getLogger(__METHOD__)->error('mini2', $minimum_amount);
-	$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
-		$this->getLogger(__METHOD__)->error('mini3', $amount);
-	if (!empty($minimum_amount) && $minimum_amount<$amount)	{
-		$this->getLogger(__METHOD__)->error('mini4', $amount);
-		return 'true';
-	}
-	} 
-	return false;
-	}
-	
-	
-	public function allowedCountrieslist(Basket $basket, $allowed_country) {
-		$this->getLogger(__METHOD__)->error('list', $basket);
+	public function allowedCountries(Basket $basket, $allowed_country) {
 		$allowed_country = str_replace(' ', '', strtoupper($allowed_country));
 		$allowed_country_array = explode(',', $allowed_country);	
 		
@@ -908,4 +863,31 @@ class PaymentService
 		}
 		return false;
 	}
+	
+	public function getMinBasketAmount(Basket $basket, $minimum_amount) {	
+		if (!is_null($basket) && $basket instanceof Basket) {
+		$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
+			
+		if (!empty($minimum_amount) && $minimum_amount<=$amount)	{
+		
+			return true;
+		}
+	} 
+		return false;
+	}
+	
+	public function getMaxBasketAmount(Basket $basket, $maximum_amount) {	
+		if (!is_null($basket) && $basket instanceof Basket) {
+		$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
+			
+		if (!empty($maximum_amount) && $maximum_amount<=$amount)	{
+		
+			return true;
+		}
+	} 
+		return false;
+	}
+	
+	
+	
 }
