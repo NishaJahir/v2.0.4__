@@ -869,4 +869,37 @@ class PaymentService
 		return false;
 	}
 	
-}
+	
+	public function getMinBasketAmount(Basket $basket, $minimum_amount) {
+	
+	if (! is_null($basket) && $basket instanceof Basket) {
+	$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
+	if (!empty($minimum_amount) && $minimum_amount<$amount)	{
+		return 'true';
+	}
+	} 
+	return false;
+	}
+	
+	
+	public function allowedCountrieslist(Basket $basket, $allowed_country) {
+		$allowed_country = str_replace(' ', '', strtoupper($allowed_country));
+		$allowed_country_array = explode(',', $allowed_country);	
+		
+			if (! is_null($basket) && $basket instanceof Basket) {
+			if(!empty($basket->customerInvoiceAddressId)){
+				$billingAddressId = $basket->customerInvoiceAddressId;				
+				$address = $this->addressRepository->findAddressById($billingAddressId);
+				if(!empty($address)){
+					$country = $this->countryRepository->findIsoCode($address->countryId, 'iso_code_2');
+					if(!empty($country)){
+						if (in_array ($country, $allowed_country_array)) {
+							return true;
+						}  
+					}
+				}
+			}
+		
+		}
+		return false;
+	}
