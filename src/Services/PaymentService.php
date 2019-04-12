@@ -872,10 +872,13 @@ class PaymentService
 	
 	public function getMinBasketAmount(Basket $basket, $minimum_amount) {
 	$this->getLogger(__METHOD__)->error('mini', $basket);
-		$this->getLogger(__METHOD__)->error('mini', $minimum_amount);
+		$this->getLogger(__METHOD__)->error('mini1', $minimum_amount);
 	if (! is_null($basket) && $basket instanceof Basket) {
+		$this->getLogger(__METHOD__)->error('mini2', $minimum_amount);
 	$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
+		$this->getLogger(__METHOD__)->error('mini3', $amount);
 	if (!empty($minimum_amount) && $minimum_amount<$amount)	{
+		$this->getLogger(__METHOD__)->error('mini4', $amount);
 		return 'true';
 	}
 	} 
