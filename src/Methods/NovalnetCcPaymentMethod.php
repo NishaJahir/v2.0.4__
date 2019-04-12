@@ -20,9 +20,9 @@ use Plenty\Modules\Payment\Method\Contracts\PaymentMethodService;
 use Plenty\Plugin\Application;
 use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
-use Plenty\Plugin\Log\Loggable;
-use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Basket\Models\Basket;
+use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
+
 
 /**
  * Class NovalnetCcPaymentMethod
@@ -31,7 +31,7 @@ use Plenty\Modules\Basket\Models\Basket;
  */
 class NovalnetCcPaymentMethod extends PaymentMethodService
 {
-	use Loggable;
+	
 
     /**
      * @var ConfigRepository
@@ -79,19 +79,30 @@ class NovalnetCcPaymentMethod extends PaymentMethodService
      */
     public function isActive():bool
     {
+       if ($this->configRepository->get('Novalnet.novalnet_cc_payment_active') == 'true') {
+		
 		$active_payment_allowed_country = 'true';
 		if ($allowed_country = $this->configRepository->get('Novalnet.novalnet_cc_allowed_country')) {
 		$active_payment_allowed_country  = $this->paymentService->allowedCountrieslist($this->basket, $allowed_country);
 		}
 	    
-	        $active_payment_minimum_amount = 'true';
-	        if ($minimum_amount = $this->configRepository->get('Novalnet.novalnet_cc_minimum_order_amount')) {
+	    $active_payment_minimum_amount = 'true';
+	    $minimum_amount = trim($this->configRepository->get('Novalnet.novalnet_cc_minimum_order_amount'));
+	    if (!empty($minimum_amount) && is_numeric($minimum_amount)) {
 		$active_payment_minimum_amount = $this->paymentService->getMinBasketAmount($this->basket, $minimum_amount);
 		}
+		
+		$active_payment_maximum_amount = 'true';
+	    $maximum_amount = trim($this->configRepository->get('Novalnet.novalnet_cc_maximum_order_amount'));
+	    if (!empty($maximum_amount) && is_numeric($maximum_amount)) {
+		$active_payment_maximum_amount = $this->paymentService->getMaxBasketAmount($this->basket, $maximum_amount);
+		}
 	    
-	    $this->getLogger(__METHOD__)->error('basket', $this->basket);
-	    $this->getLogger(__METHOD__)->error('min', $minimum_amount);
-        return (bool)(($this->configRepository->get('Novalnet.novalnet_cc_payment_active') == 'true') && $this->paymentHelper->paymentActive() && $active_payment_allowed_country && $active_payment_minimum_amount);
+	    
+        return (bool)($this->paymentHelper->paymentActive() && $active_payment_allowed_country && $active_payment_minimum_amount && $active_payment_maximum_amount);
+        } 
+        return false;
+    
     }
 
     /**
