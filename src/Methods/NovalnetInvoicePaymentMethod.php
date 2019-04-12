@@ -23,14 +23,14 @@ use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
 use Plenty\Modules\Basket\Models\Basket;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
-
+use Plenty\Plugin\Log\Loggable;
 /**
  * Class NovalnetPaymentMethod
  *
  * @package Novalnet\Methods
  */
 class NovalnetInvoicePaymentMethod extends PaymentMethodService
-{
+{ use Loggable;
     /**
      * @var ConfigRepository
      */
@@ -87,6 +87,7 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodService
 	    $active_payment_minimum_amount = 'true';
 	    $minimum_amount = trim($this->configRepository->get('Novalnet.novalnet_invocie_minimum_order_amount'));
 	    if (!empty($minimum_amount) && is_numeric($minimum_amount)) {
+		    $this->getLogger(__METHOD__)->error('minamount', $minimum_amount);
 		$active_payment_minimum_amount = $this->paymentService->getMinBasketAmount($this->basket, $minimum_amount);
 		}
 		
