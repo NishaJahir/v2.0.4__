@@ -170,6 +170,22 @@
                   "defaultValue":""
                }
             },
+            "novalnet_cc_minimum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.minimumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
+            "novalnet_cc_maximum_order_amount":{  
+               "type":"inputText",
+               "required":false,
+               "label":"Config.maximumOrderAmountLabel",
+               "options":{  
+                  "defaultValue":""
+               }
+            },
             "novalnet_cc_payment_logo":{  
                "type":"inputFile",
                "required":false,
