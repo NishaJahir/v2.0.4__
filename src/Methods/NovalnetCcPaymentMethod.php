@@ -21,6 +21,9 @@ use Plenty\Plugin\Application;
 use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
 
+use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
+use Plenty\Modules\Basket\Models\Basket;
+
 /**
  * Class NovalnetCcPaymentMethod
  *
@@ -42,6 +45,11 @@ class NovalnetCcPaymentMethod extends PaymentMethodService
 	 * @var PaymentService
 	 */
 	private $paymentService;
+	
+	/**
+     * @var Basket
+     */
+    private $basket;
 
     /**
      * NovalnetPaymentMethod constructor.
@@ -52,11 +60,13 @@ class NovalnetCcPaymentMethod extends PaymentMethodService
      */
     public function __construct(ConfigRepository $configRepository,
                                 PaymentHelper $paymentHelper,
-                                PaymentService $paymentService)
+                                PaymentService $paymentService,
+			       BasketRepositoryContract $basket)
     {
         $this->configRepository = $configRepository;
         $this->paymentHelper = $paymentHelper;
         $this->paymentService = $paymentService;
+	$this->basket = $basket->load();
     }
 
     /**
@@ -69,8 +79,16 @@ class NovalnetCcPaymentMethod extends PaymentMethodService
     {
 		$active_payment_allowed_country = 'true';
 		if ($allowed_country = $this->configRepository->get('Novalnet.novalnet_cc_allowed_country')) {
-		$active_payment_allowed_country  = $this->paymentService->allowedCountries($allowed_country);
+		$active_payment_allowed_country  = $this->paymentService->allowedCountrieslist($this->basket, $allowed_country);
 		}
+	    
+	        $minimum_order_amount = 'true';
+	        if ($minimum_amount = $this->configRepository->get('Novalnet.novalnet_cc_minimum_order_amount')) {
+		$active_payment_minimum_amount = $this->paymentService->getMinBasketAmount($this->basket, $minimum_amount);
+		}
+	    
+	    
+	    $this->getLogger(__METHOD__)->error('min', )
         return (bool)(($this->configRepository->get('Novalnet.novalnet_cc_payment_active') == 'true') && $this->paymentHelper->paymentActive() && $active_payment_allowed_country);
     }
 
@@ -135,4 +153,6 @@ class NovalnetCcPaymentMethod extends PaymentMethodService
     {
         return false;
     }
+    
+	
 }
