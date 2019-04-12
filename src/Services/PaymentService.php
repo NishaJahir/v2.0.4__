@@ -880,7 +880,7 @@ class PaymentService
 		if (!is_null($basket) && $basket instanceof Basket) {
 		$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
 			
-		if (!empty($maximum_amount) && $maximum_amount<=$amount)	{
+		if (!empty($maximum_amount) && $maximum_amount>=$amount)	{
 		
 			return true;
 		}
