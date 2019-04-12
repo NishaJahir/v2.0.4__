@@ -871,7 +871,8 @@ class PaymentService
 	
 	
 	public function getMinBasketAmount(Basket $basket, $minimum_amount) {
-	
+	$this->getLogger(__LMETHOD__)->error('mini', $basket);
+		$this->getLogger(__LMETHOD__)->error('mini', $minimum_amount);
 	if (! is_null($basket) && $basket instanceof Basket) {
 	$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
 	if (!empty($minimum_amount) && $minimum_amount<$amount)	{
@@ -883,6 +884,7 @@ class PaymentService
 	
 	
 	public function allowedCountrieslist(Basket $basket, $allowed_country) {
+		$this->getLogger(__LMETHOD__)->error('list', $basket);
 		$allowed_country = str_replace(' ', '', strtoupper($allowed_country));
 		$allowed_country_array = explode(',', $allowed_country);	
 		
@@ -903,3 +905,4 @@ class PaymentService
 		}
 		return false;
 	}
+}
