@@ -21,6 +21,8 @@ use Plenty\Modules\Payment\Method\Contracts\PaymentMethodService;
 use Plenty\Plugin\Application;
 use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
+use Plenty\Modules\Basket\Models\Basket;
+use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 
 /**
  * Class NovalnetPrzelewyPaymentMethod
@@ -44,6 +46,11 @@ class NovalnetPrzelewyPaymentMethod extends PaymentMethodService
 	 */
 	private $paymentService;
 	
+	/**
+     * @var Basket
+     */
+    private $basket;
+	
     /**
      * NovalnetPaymentMethod constructor.
      *
@@ -53,11 +60,13 @@ class NovalnetPrzelewyPaymentMethod extends PaymentMethodService
      */
     public function __construct(ConfigRepository $configRepository,
                                 PaymentHelper $paymentHelper,
-                                PaymentService $paymentService)
+                                PaymentService $paymentService,
+			       BasketRepositoryContract $basket)
     {
         $this->configRepository = $configRepository;
         $this->paymentHelper = $paymentHelper;
         $this->paymentService  = $paymentService;
+	    $this->basket = $basket->load();
     }
 
     /**
@@ -68,11 +77,30 @@ class NovalnetPrzelewyPaymentMethod extends PaymentMethodService
      */
     public function isActive():bool
     {
+       if ($this->configRepository->get('Novalnet.novalnet_przelewy_payment_active') == 'true') {
+		
 		$active_payment_allowed_country = 'true';
 		if ($allowed_country = $this->configRepository->get('Novalnet.novalnet_przelewy_allowed_country')) {
-		$active_payment_allowed_country  = $this->paymentService->allowedCountries($allowed_country);
+		$active_payment_allowed_country  = $this->paymentService->allowedCountrieslist($this->basket, $allowed_country);
 		}
-        return (bool)(($this->configRepository->get('Novalnet.novalnet_przelewy_payment_active') == 'true') && $this->paymentHelper->paymentActive() && $active_payment_allowed_country);
+	    
+	    $active_payment_minimum_amount = 'true';
+	    $minimum_amount = trim($this->configRepository->get('Novalnet.novalnet_przelewy_minimum_order_amount'));
+	    if (!empty($minimum_amount) && is_numeric($minimum_amount)) {
+		$active_payment_minimum_amount = $this->paymentService->getMinBasketAmount($this->basket, $minimum_amount);
+		}
+		
+		$active_payment_maximum_amount = 'true';
+	    $maximum_amount = trim($this->configRepository->get('Novalnet.novalnet_przelewy_maximum_order_amount'));
+	    if (!empty($maximum_amount) && is_numeric($maximum_amount)) {
+		$active_payment_maximum_amount = $this->paymentService->getMaxBasketAmount($this->basket, $maximum_amount);
+		}
+	    
+	    
+        return (bool)($this->paymentHelper->paymentActive() && $active_payment_allowed_country && $active_payment_minimum_amount && $active_payment_maximum_amount);
+        } 
+        return false;
+    
     }
 
     /**
