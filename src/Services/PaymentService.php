@@ -865,10 +865,12 @@ class PaymentService
 	}
 	
 	public function getMinBasketAmount(Basket $basket, $minimum_amount) {	
+		$this->getLogger(__METHOD__)->error('enter', $minimum_amount);
 		if (!is_null($basket) && $basket instanceof Basket) {
 		$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
 			
 		if (!empty($minimum_amount) && $minimum_amount<=$amount)	{
+			$this->getLogger(__METHOD__)->error('enter2', $amount);
 		
 			return true;
 		}
