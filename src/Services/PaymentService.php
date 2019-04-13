@@ -855,7 +855,7 @@ class PaymentService
 				}
 		
 			}
-		} catch(Exception $e) {
+		} catch(\Exception $e) {
 			return false;
 		}
 		return false;
