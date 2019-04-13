@@ -83,7 +83,7 @@ class NovalnetPaypalPaymentMethod extends PaymentMethodService
 		$active_payment_allowed_country = 'true';
 	        $allowed_country = $this->configRepository->get('Novalnet.novalnet_paypal_allowed_country');	
 		$allowed_country = str_replace(' ', '', strtoupper($allowed_country));
-		if (! empty($allowed_country) && preg_match('/^[a-zA-Z?\,]+$/', $allowed_country ) ) {
+		if (! empty($allowed_country) && preg_match('/^[a-z]{2}(?:,[a-z]{2})*$/i', $allowed_country ) ) {
 		$active_payment_allowed_country  = $this->paymentService->allowedCountries($this->basket, $allowed_country);
 		}
 	    
