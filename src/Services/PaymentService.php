@@ -846,19 +846,13 @@ class PaymentService
 		$allowed_country = str_replace(' ', '', strtoupper($allowed_country));
 		$allowed_country_array = explode(',', $allowed_country);	
 		
-			if (! is_null($basket) && $basket instanceof Basket) {
-			if(!empty($basket->customerInvoiceAddressId)){
+			if (! is_null($basket) && $basket instanceof Basket && !empty($basket->customerInvoiceAddressId)) {			
 				$billingAddressId = $basket->customerInvoiceAddressId;				
 				$address = $this->addressRepository->findAddressById($billingAddressId);
-				if(!empty($address)){
-					$country = $this->countryRepository->findIsoCode($address->countryId, 'iso_code_2');
-					if(!empty($country)){
-						if (in_array ($country, $allowed_country_array)) {
-							return true;
-						}  
-					}
+				$country = $this->countryRepository->findIsoCode($address->countryId, 'iso_code_2');
+				if(!empty($address) && !empty($country) && in_array($country,$allowed_country_array)) {								
+						return true;
 				}
-			}
 		
 		}
 		return false;
