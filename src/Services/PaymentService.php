@@ -845,7 +845,7 @@ class PaymentService
 	public function allowedCountries(Basket $basket, $allowed_country) {
 		$allowed_country = str_replace(' ', '', strtoupper($allowed_country));
 		$allowed_country_array = explode(',', $allowed_country);	
-		
+		try {
 			if (! is_null($basket) && $basket instanceof Basket && !empty($basket->customerInvoiceAddressId)) {			
 				$billingAddressId = $basket->customerInvoiceAddressId;				
 				$address = $this->addressRepository->findAddressById($billingAddressId);
@@ -854,6 +854,9 @@ class PaymentService
 						return true;
 				}
 		
+			}
+		} catch(Exception $e) {
+			return false;
 		}
 		return false;
 	}
