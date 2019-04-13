@@ -845,28 +845,28 @@ class PaymentService
 	public function allowedCountries(Basket $basket, $allowed_country) {
 		$allowed_country = str_replace(' ', '', strtoupper($allowed_country));
 		$allowed_country_array = explode(',', $allowed_country);	
-		
+		try {
 			if (! is_null($basket) && $basket instanceof Basket && !empty($basket->customerInvoiceAddressId)) {			
 				$billingAddressId = $basket->customerInvoiceAddressId;				
 				$address = $this->addressRepository->findAddressById($billingAddressId);
-				$this->getLogger(__METHOD__)->error('add', $address);
 				$country = $this->countryRepository->findIsoCode($address->countryId, 'iso_code_2');
 				if(!empty($address) && !empty($country) && in_array($country,$allowed_country_array)) {								
 						return true;
 				}
 		
 			}
-		
+		} catch(\Exception $e) {
+			return false;
+		}
 		return false;
 	}
 	
 	public function getMinBasketAmount(Basket $basket, $minimum_amount) {	
-		$this->getLogger(__METHOD__)->error('enter', $minimum_amount);
+		
 		if (!is_null($basket) && $basket instanceof Basket) {
 		$amount = $this->paymentHelper->ConvertAmountToSmallerUnit($basket->basketAmount);
 			
 		if (!empty($minimum_amount) && $minimum_amount<=$amount)	{
-			$this->getLogger(__METHOD__)->error('enter2', $amount);
 		
 			return true;
 		}
