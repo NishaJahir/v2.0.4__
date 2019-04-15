@@ -258,7 +258,8 @@
                "type":"inputText",
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
-               "options":{  
+               "options":{ 
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -267,6 +268,7 @@
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -406,6 +408,7 @@
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -414,6 +417,7 @@
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -560,7 +564,8 @@
                "type":"inputText",
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
-               "options":{  
+               "options":{ 
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -568,7 +573,8 @@
                "type":"inputText",
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
-               "options":{  
+               "options":{ 
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -646,6 +652,7 @@
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -654,6 +661,7 @@
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -740,6 +748,7 @@
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -748,6 +757,7 @@
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -816,7 +826,8 @@
                "type":"inputText",
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
-               "options":{  
+               "options":{ 
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -824,7 +835,8 @@
                "type":"inputText",
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
-               "options":{  
+               "options":{ 
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -930,6 +942,7 @@
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -938,6 +951,7 @@
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -1015,6 +1029,7 @@
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -1022,7 +1037,8 @@
                "type":"inputText",
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
-               "options":{  
+               "options":{
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -1092,6 +1108,7 @@
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -1100,6 +1117,7 @@
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -1169,6 +1187,7 @@
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -1176,7 +1195,8 @@
                "type":"inputText",
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
-               "options":{  
+               "options":{ 
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -1254,6 +1274,7 @@
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
                "options":{  
+                  "tooltip":"Config.minimumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
@@ -1261,7 +1282,8 @@
                "type":"inputText",
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
-               "options":{  
+               "options":{
+                  "tooltip":"Config.maximumOrderAmountTooltip",
                   "defaultValue":""
                }
             },
